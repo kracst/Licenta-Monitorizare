@@ -1,88 +1,122 @@
 {% extends "azure_content/base.html" %}
 {% load static %}
-{% block content%}
+{% block content %}
 
-  <div class="holder"> 
-       <form method="GET">
-        <div class="boxenholder2">
-
-             <div class="factbox2">
-                 <div class="factbox-title"> 
-                    Add entry
+<div class="holder"> 
+    <!-- Secțiunea cu un carusel de imagini -->
+    <div class="col-lg-12">
+        <div class="custom-carousel-container">
+            <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'azure_content/images/sera-1.avif' %}" class="d-block w-100" alt="Economisirea timpului și resurselor">
+                        <div class="carousel-caption d-block">
+                            <div class="caption-content">
+                                <h2>Economisirea timpului</h2>
+                                <h5>Automatizarea reduce necesitatea intervențiilor manuale frecvente, economisind timp și energie.</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'azure_content/images/sera-2.avif' %}" class="d-block w-100" alt="Creșterea randamentului">
+                        <div class="carousel-caption d-block">
+                            <div class="caption-content">
+                                <h2>Creșterea randamentului</h2>
+                                <h5>Prin menținerea unor condiții constante și controlate, serele automatizate pot contribui la o producție mai mare și mai sănătoasă a plantelor.</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'azure_content/images/sera_3.jpg' %}" class="d-block w-100" alt="Reducerea riscurilor de dăunători și boli">
+                        <div class="carousel-caption d-block">
+                            <div class="caption-content">
+                                <h2>Economie de resurse</h2>
+                                <h5>Reducerea consumului de apă cu 40% și a energiei cu 25% prin irigații și iluminat inteligent.</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="factbox-fact"> 
-                    <a class="iconcolor" href="{% url 'create'%}"> <i class="fas fa-plus-circle"></i> </a>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-
-            <div class="factbox2">
-                <div class="factbox-title"> 
-                    <i class="fas fa-project-diagram mr-2"></i> # entries
-                </div>
-                <div class="factbox-fact"> 
-                    {{ project_list|length }}
-                </div>
-            </div>
-
-            <div class="factbox2">
-                <div class="factbox-title"> 
-                    <i class="fas fa-chart-line mr-2"></i> Channel
-                </div>
-                <div class="factbox-fact"> 
-                 CBI Analytics
-                </div>
-            </div>
-
-
-            <div class="factbox2">
-                 <div class="factbox-title"> 
-                   <i class="fas fa-times-circle mr-2"></i> Go to the about page
-                </div>
-                <div class="factbox-fact"> 
-                    <a href="{% url 'about'%}"> <i class="fas fa-play"></i></a>
-                </div>
-            </div>
-
-            
-
-        </div>
-        
-        <div class="shadowholder">
-            <div class="subtitel2"> 
-                <div> <i class="fas fa-sticky-note mr-2"></i> My data </div>
-            </div>
-                <div class="content mb-3"> 
-                    <table id="example5" class="beheertable" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Created at</th>
-                                <th>Edited at</th>
-                                <th>Delete</th>
-                                
-                                
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                             {%for a in project_list%}
-                                <tr>
-                                    <td><a href="{% url 'edit' a.id%}">{{a.name}}</a> </td>
-                                    <td> {{a.description}} </td>
-                                    <td> {{a.created_at|date:'d-m-Y H:i'}}</td>
-                                    <td> {{a.edited_at|date:'d-m-Y H:i'}}</td>
-                                    <td> <a href="{% url 'delete' a.id%}">delete</a></td>
-                                </tr>
-                             {%endfor%}
-
-                        <tbody>
-                        
-                        
-                    </table>
-                </div>
         </div>
     </div>
-
-
-{% endblock content%}
+    <!-- Detailed Information -->
+    <div class="row mt-5">
+        <div class="col-lg-6">
+            <h3 class="mb-4">Cum funcționează sistemul?</h3>
+            <p>Sistemul nostru de automatizare utilizează senzori pentru a monitoriza în timp real:</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Temperatura și umiditatea aerului</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Umiditatea solului</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Nivelul de lumină</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Temperatura apei din rezervor</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="mb-4">Beneficii Adiționale</h3>
+            <div class="accordion" id="benefitsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            Alertă Timpurie a Problemelor
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            Sistemul detectează anomalii și trimite alertă imediată pe email sau telefon.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            Control de la Distanță
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            Puteți ajusta setările de oriunde prin intermediul aplicației mobile.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            Rapoarte Personalizate
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            Generare automată de rapoarte săptămânale/lunare pentru analiza performanței.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Custom styling for the new section */
+    .card {
+        transition: transform 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+    }
+    .list-unstyled i {
+        color: #28a745;
+    }
+</style>
+{% endblock content %}

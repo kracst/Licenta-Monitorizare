@@ -68,4 +68,3 @@ jobs:
         with:
           app-name: 'monitorizare-sera'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F64D63B057914A8684542322225D056B }}
