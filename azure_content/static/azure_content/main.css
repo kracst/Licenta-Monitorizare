@@ -221,9 +221,7 @@ body {
   cursor: pointer; /* Change cursor to pointer */
 }
 
-#side-menu {
-  
-}
+
 /* Ensure the menu button is visible on mobile */
 @media (max-width: 768px) {
   #openlogo {
