@@ -31,8 +31,6 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run collectstatic
-        run: python manage.py collectstatic --noinput
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -50,9 +48,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
@@ -70,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_42760642C55747709E497C133ECD9248 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2491919D22FD4C1A816BFF381A6B2153 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0274998489174EEA9DE605E49E816AFB }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_AFA411308FE64A6897151AEED2F812F2 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_27FF129739D04579A063F1ACC8652C02 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E11C8753ED5145E9BF61351CAE0C935C }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'kracst-django'
+          app-name: 'monitorizare-sera'
           slot-name: 'Production'
           
