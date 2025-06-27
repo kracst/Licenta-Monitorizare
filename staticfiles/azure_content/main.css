@@ -1,0 +1,630 @@
+#main{
+    margin-left: 0px;
+    transition: margin-left 0.5s;
+    z-index: 999988;
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif ;
+    transition: margin-left 0.3s ease;
+  }
+.navbar, #main {
+    overflow: visible !important;
+}
+
+#main.shifted {
+  margin-left: 250px; /* Match the width of the side menu */
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  /*background-color: #28a745 !important;*/
+  color: #333;
+
+}
+
+/* Custom Carousel Container */
+.custom-carousel-container {
+  width: 100%; /* Adjust this value to control width */
+  /*max-width: 1000px; /* Maximum width */
+  height: 1000px; /* Fixed height */
+  margin: 0 auto;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Carousel Base Styling */
+#customCarousel {
+  height: 100%;
+}
+
+#customCarousel .carousel-inner {
+  height: 100%;
+  border-radius: 8px;
+}
+
+#customCarousel .carousel-item {
+  height: 100%;
+}
+
+#customCarousel .carousel-item img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Caption Styling */
+#customCarousel .carousel-caption {
+  bottom: 20px;
+  left: 20px;
+  right: auto;
+  text-align: left;
+  padding: 0;
+  max-width: 60%;
+}
+
+#customCarousel .caption-content {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#customCarousel .carousel-caption h5 {
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+#customCarousel .carousel-caption p {
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* Navigation Buttons */
+#customCarousel .carousel-control-prev,
+#customCarousel .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+#customCarousel .carousel-control-prev {
+  left: 15px;
+}
+
+#customCarousel .carousel-control-next {
+  right: 15px;
+}
+
+#customCarousel .carousel-control-prev-icon,
+#customCarousel .carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover Effects */
+#customCarousel .carousel-control-prev:hover,
+#customCarousel .carousel-control-next:hover {
+  background-color: rgba(0,0,0,0.5);
+  opacity: 1;
+}
+
+#customCarousel .caption-content {
+  transition: all 0.3s ease;
+}
+
+#customCarousel .caption-content:hover {
+  background-color: rgba(0,0,0,0.8);
+  transform: translateY(-2px);
+}
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Make captions visible and properly sized */
+  #customCarousel .carousel-caption {
+      display: block !important; /* Force show on mobile */
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      max-width: 100%;
+  }
+  
+  #customCarousel .caption-content {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+  }
+  
+  /* Adjust text sizes for mobile */
+  #customCarousel .carousel-caption h5 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+  }
+  
+  #customCarousel .carousel-caption p {
+      font-size: 0.8rem;
+      margin-bottom: 0;
+  }
+  .custom-carousel-container {
+    height: 60vh; /* Uses 60% of screen height */
+    width: 95%;
+    min-height: 350px; /* Minimum height */
+}
+
+/* Ensure images fill the space */
+#customCarousel .carousel-item img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center center; /* Focus on center of image */
+}
+
+/* Adjust caption position for larger images */
+#customCarousel .carousel-caption {
+    bottom: 20px;
+}
+  
+  /* For very small devices */
+  @media (max-width: 480px) {
+      #customCarousel .carousel-caption h5 {
+          font-size: 0.9rem;
+      }
+      
+      #customCarousel .carousel-caption p {
+          font-size: 0.7rem;
+      }
+      
+      .custom-carousel-container {
+        height: 55vh; /* Slightly smaller on tiny screens */
+        min-height: 300px;
+      }
+  }
+}
+
+#openlogo {
+  color: #ffffff; 
+  width: 30px; 
+  height: 30px; 
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 15px; /* Adjust for horizontal position */
+  top: -25px;  /* Adjust to move it inside the green navbar */
+  z-index: 9999; /* Ensure visibility above other elements */
+  transition: transform 0.3s; /* Smooth animation */
+}
+
+/* Ensure the icon is white and centered within the button */
+#openlogo i {
+  color: white; /* Ensure the icon color is white */
+  font-size: 20px; /* Adjust the size of the icon */
+}
+
+/* Make sure the button stays visible when not hovered */
+#openlogo {
+  visibility: visible; /* Ensure the button is always visible */
+  opacity: 1; /* Make the button fully opaque */
+}
+
+/* Ensure the button looks good on hover */
+#openlogo:hover {
+  background-color: #102044; /* Darker background on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+
+/* Ensure the menu button is visible on mobile */
+@media (max-width: 768px) {
+  #openlogo {
+      width: 30px; /* Ensure the button is visible */
+      color: #fff; /* Ensure the icon color is visible */
+      transition: width 0.3s;
+  }
+
+  /* Make the side-menu closed by default on mobile */
+  #side-menu {
+      width: 0;
+      transition: 0.3s;
+     
+  }
+
+  /* Make sure the menu will slide in properly */
+  #moduleblok {
+      width: 0;
+      transition: 0.3s;
+      
+  }
+
+  /* Adjust the main content when the side menu is open */
+  #main {
+      margin-left: 0;
+      transition: margin-left 0.3s;
+  }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1050; /* Ensures it's above other elements */
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 5px;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1100 !important; /* High z-index to make sure it's visible */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; /* Align to the right */
+  top: 40px; /* Adjust below the button */
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show dropdown on click */
+.dropdown:focus-within .dropdown-content, 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+  
+.Logo{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  font-size: 25px;
+  margin-left: 5px;
+}
+
+
+.titelbalk{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 5px;
+  height: 30px;
+  background-color: #2D323E;
+  color: #ffffff;
+
+}
+
+.icon{
+  margin-right: 5px;
+}
+.iconcolor:hover{
+  color: #01143d;
+}
+
+  .open-slide{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+  }
+  .navbar{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 63px;
+    background-color: #28a745 !important;
+    overflow: visible;
+    z-index: 999999;
+    box-shadow: -4px 5px 13px -1px rgba(0,0,0,0.32);
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .navbar a{
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+  
+  }
+  #openlogo{
+    color: #000000 ;
+    margin-top: 12px;
+    margin-left: 7px;
+    width: 0px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .logo{
+  
+    width: 157px;
+    height: 52px;
+    z-index: 999999;
+  }
+  .navbar ul {
+   
+    list-style: none;
+  }
+  #logozoom{
+    font: 25px;
+  }
+  .navbar a #logozoom:hover{
+    color: rgb(32, 0, 83);
+  }
+  
+  /* Sidebar Container */
+.side-nav {
+  height: 83%;
+  width: 0; /* Start closed */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; /* Hide horizontal overflow */
+  /* Enable vertical scrolling */
+  overflow-y: auto;
+  padding-top: 60px;
+  transition: width 0.3s ease;
+  border-right: green !important;
+}
+
+.side-nav.open {
+  width: 250px; /* Open state width */
+  padding: 60px 15px 20px 15px; /* Add side padding when open */
+  border-right: red !important;
+
+}
+
+/* Module block styling */
+.moduleblok {
+  width: 0;
+  transition: width 0.3s;
+}
+
+.moduleblok.open {
+  width: 200px;
+}
+
+
+
+
+/* Menu items */
+.side-nav .menuitem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 15px; /* Adjusted padding */
+  margin: 5px 0; /* Added margin between items */
+  text-decoration: none;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  border-radius: 5px;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow-x: hidden; /* Hide overflow text */
+  overflow-y: auto;
+}
+
+/* Menu item hover states */
+.side-nav .menuitem:hover {
+  background-color: #e5e7e7;
+  color: #28a745;
+}
+
+.side-nav .menuitem.active {
+  background-color: #e5e7e7;
+  color: #28a745 !important;
+}
+
+/* Icon styling */
+.side-nav .menuitem .navicon {
+  width: 30px;
+  min-width: 30px; /* Ensure fixed width */
+  margin-right: 10px;
+  text-align: center;
+}
+
+/* Weather Info Box */
+.sidebar-weather {
+  margin: 30px 0;
+  padding: 15px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0; /* Lighter border */
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar-weather .weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sidebar-weather .weather-header i {
+  color: #fcbf49 !important;
+  font-size: 1.2rem;
+}
+
+.sidebar-weather .weather-details p {
+  margin: 12px 0; /* Increased spacing */
+  padding: 3px 3px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.sidebar-weather .weather-details i {
+  width: 20px;
+  margin-right: 8px;
+  color: #6c757d;
+}
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  /* Fix stacking context */
+  body {
+    z-index: 0 !important; /* Remove negative z-index */
+    position: relative;
+  }
+  
+  .navbar {
+    z-index: 1000; /* Reduced from 999999 */
+  }
+  
+  .side-nav {
+    z-index: 999; /* Just below navbar */
+    height: calc(100vh - 63px) !important; /* Full viewport minus navbar */
+    width: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: #d4edda !important;
+    padding-top: 20px;
+  }
+  
+  .side-nav.open {
+    width: 57vw !important;
+    transform: translateX(0);
+  }
+  
+  /* Ensure content is visible */
+  .side-nav .menuitem,
+  .side-nav .sidebar-weather {
+    min-width: 50vw !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+  .moduleblok {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    color: #f2f2f2;
+    height: 25px;
+    transition: 0.5s;
+  }
+  
+  .module{
+    width: 80%;
+    height: 100%;
+    text-align: center;
+    background-color: #3b5998;
+  }
+  
+  .sluiten{
+    width: 20%;
+    height: 100%;
+    background-color: #a7a5a5;
+    color: rgb(17, 15, 15);
+    font-weight: bold;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .sluiten:hover{
+    background-color: #570000;
+    color: red;
+    text-decoration: none;
+  }
+  
+  
+.dropbtn{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 999999;
+    background-color: #3B5998;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    box-shadow: -4px 5px 13px -1px rgba(0,0,0,0.32);
+    padding: 5px;
+  }
+  
+  .dropbtn:hover{
+    background-color: #102044;
+  }
+
+  
+.beheertable {
+  border-collapse: collapse;
+  width: 98%;
+  margin:0px;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 7px 7px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+  margin-left: 1%;
+  margin-left: 1%;
+} 
+  .holder{
+    display: flex;
+    flex-direction: column;
+    width:98%;
+    margin-top: 10px;
+  }
+.content{
+  width: 98%;
+  margin-left: 1%;
+  margin-top: 1%;
+
+}
