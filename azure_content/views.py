@@ -30,13 +30,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             email = form.cleaned_data.get('email')  # Get the email from the form
-            send_mail(
-                'Cont creat',
-                'Contul tău a fost creat cu succes!',
-                None,  # Uses DEFAULT_FROM_EMAIL from settings.py
-                [email],
-                fail_silently=False,
-            )
+            
             username = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
