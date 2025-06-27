@@ -41,11 +41,11 @@
             <div class="card-body text-center p-3">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <i class="fas fa-lightbulb fa-2x"></i>
-                    <span class="badge bg-white text-warning rounded-pill">Offline</span>
+                    <span class="badge bg-white text-warning rounded-pill">Live</span>
                 </div>
                 <h5 class="mb-1">Luminozitate</h5>
-                <h2 class="mb-0 card-value">-- lx</h2>
-                <small class="text-white-50">Actualizată: --</small>
+                <h2 class="mb-0 card-value" id="luminosity-value">{{ sensor_data.0.luminosity|default:"--"}}%</h2>
+                <small class="text-white-50">Actualizată: <span id="luminosity-time">Chiar acum</span></small>
             </div>
         </div>
     </div>
@@ -56,11 +56,11 @@
             <div class="card-body text-center p-3">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <i class="fas fa-flask fa-2x"></i>
-                    <span class="badge bg-white text-success rounded-pill">Offline</span>
+                    <span class="badge bg-white text-success rounded-pill">Live</span>
                 </div>
-                    <h5 class="mb-1">NIvel pH</h5>
-                    <h2 class="mb-0 card-value">--</h2>
-                    <small class="text-white-50">Actualizată: --</small>
+                    <h5 class="mb-1">Nivel pH</h5>
+                    <h2 class="mb-0 card-value" id="ph-value">{{ sensor_data.0.ph|default:"--"}}</h2>
+                    <small class="text-white-50">Actualizată: <span id="luminosity-time">Chiar acum</span></small>
                 </div>
             </div>
         </div>
@@ -161,6 +161,54 @@
             </div>
         </div>
     </div>
+    <!-- Summary Stats Row for Luminosity -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-sun text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Luminozitate maximă</h6>
+                            <h4 class="mb-0" id="max-lum">-- %</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-info bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-moon text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Luminozitate minimă</h6>
+                            <h4 class="mb-0" id="min-lum">-- %</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-adjust text-secondary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Luminozitate medie</h6>
+                            <h4 class="mb-0" id="avg-lum">-- %</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Charts Section -->
     <div class="row mb-4">
         <!-- Temperature Chart -->
@@ -227,7 +275,9 @@
                     </div>
                     <div>
                         <button class="btn btn-sm btn-outline-primary" id="refresh-data">
-                            <i class="fas fa-sync-alt me-1"></i> Reîmprospătează
+                            <a href="{% url 'download_excel' %}" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Descarcă Excel
+                            </a>
                         </button>
                     </div>
                 </div>
@@ -238,6 +288,7 @@
                                 <tr>
                                     <th>Temperatură (°C)</th>
                                     <th>Umiditate (%)</th>
+                                    <th>Luminozitate (%)</th>
                                     <th>Marca temporală</th>
                                     <th>Starea</th>
                                 </tr>
@@ -247,6 +298,7 @@
                                 <tr>
                                     <td>{{ data.temperature }}</td>
                                     <td>{{ data.humidity }}</td>
+                                    <td>{{data.luminosity}}</td>
                                     <td>{{ data.timestamp }}</td>
                                     <td><span class="badge bg-success">Normal</span></td>
                                 </tr>
@@ -424,24 +476,28 @@
 
                 if (data.length === 0) return;
 
-                const reversedData = data.reverse();
+                
 
                 // Update card values
                 const latestData = data[0];
                 document.getElementById('humidity-value').textContent = `${latestData.humidity}%`;
                 document.getElementById('temperature-value').textContent = `${latestData.temperature}°C`;
+                document.getElementById('luminosity-value').textContent = `${latestData.luminosity}%`;
+                document.getElementById('ph-value').textContent = `${latestData.ph}`;
 
                 // Update timestamps
                 const now = new Date();
                 document.getElementById('humidity-time').textContent = now.toLocaleTimeString();
                 document.getElementById('temperature-time').textContent = now.toLocaleTimeString();
+                document.getElementById('luminosity-time').textContent = now.toLocaleTimeString();
 
                 // Prepare data for table and charts
                 const temperatureData = [];
                 const humidityData = [];
+                const luminosityData = [];
                 const timestamps = [];
 
-                reversedData.forEach(item => {
+                data.forEach(item => {
                     const formattedDate = new Date(item.timestamp).toLocaleString('en-GB', { 
                         day: '2-digit', month: '2-digit', year: 'numeric', 
                         hour: '2-digit', minute: '2-digit' 
@@ -452,6 +508,7 @@
                     row.innerHTML = `
                         <td>${item.temperature}</td>
                         <td>${item.humidity}</td>
+                        <td>${item.luminosity}</td>
                         <td>${formattedDate}</td>
                         <td><span class="badge bg-success">Normal</span></td>
                     `;
@@ -461,6 +518,7 @@
                     timestamps.push(formattedDate);
                     temperatureData.push(item.temperature);
                     humidityData.push(item.humidity);
+                    //luminosityData.push(item.luminosity);
                 });
 
                 // Update charts
@@ -496,6 +554,10 @@
         document.getElementById('max-humidity').textContent = `${Math.max(...humidities).toFixed(1)}%`;
         document.getElementById('min-humidity').textContent = `${Math.min(...humidities).toFixed(1)}%`;
         document.getElementById('avg-humidity').textContent = `${(humidities.reduce((a, b) => a + b, 0) / humidities.length).toFixed(1)}%`;
+        const luminosities = data.map(item => item.luminosity);
+        document.getElementById('max-lum').textContent = `${Math.max(...luminosities).toFixed(1)}%`;
+        document.getElementById('min-lum').textContent = `${Math.min(...luminosities).toFixed(1)}%`;
+        document.getElementById('avg-lum').textContent = `${(luminosities.reduce((a, b) => a + b, 0) / luminosities.length).toFixed(1)}%`;
     }
 
     // Time range selection
@@ -520,6 +582,7 @@
         fetchSensorData();
         setInterval(fetchSensorData, 5000); // Refresh every 30 seconds
     });
+
 </script>
 
 <style>
@@ -541,9 +604,6 @@
     .table-responsive::-webkit-scrollbar-thumb {
         background: #888;
         border-radius: 4px;
-    }
-    body {
-    background-color: #d4edda; /* Light green background */
     }
 </style>
 
