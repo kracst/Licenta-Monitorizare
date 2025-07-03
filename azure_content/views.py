@@ -106,7 +106,10 @@ def receive_data(request):
             temperature = data.get('temperature')
             humidity = data.get('humidity')
             luminosity = data.get('luminosity')  
-            ph = data.get('ph')  
+            ph = data.get('ph')
+
+            if temperature is not None:
+                temperature += 5   
 
             if temperature is not None and humidity is not None and luminosity is not None:
                 SensorData.objects.create(temperature=temperature, humidity=humidity, luminosity=luminosity, ph=ph,  timestamp=now())
